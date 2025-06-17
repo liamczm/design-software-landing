@@ -135,7 +135,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                 Pro
               </span>
             </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 glow-text">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
               {product.title}
             </h1>
             <p className="text-xl text-muted-foreground mb-8">{product.description}</p>
@@ -239,34 +239,14 @@ export default function ProductPage({ params }: ProductPageProps) {
                 <div className="mt-12 pt-8 border-t border-border/30">
                   <h3 className="text-xl font-medium mb-6">Product Video</h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                    <div className="relative rounded-lg border border-border/50 bg-background/50 shadow-md overflow-hidden glow-border aspect-video md:col-span-1">
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/10">
-                        <div className="absolute top-2 right-2 bg-primary/90 text-white text-xs px-2 py-1 rounded">
-                          Demo
-                        </div>
-                        <div className="h-12 w-12 rounded-full bg-black/50 flex items-center justify-center">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="text-white"
-                          >
-                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                          </svg>
-                        </div>
-                      </div>
-                      <Image
-                        src={product.image || "/placeholder.svg?height=200&width=350&text=Video+Thumbnail"}
-                        width={350}
-                        height={200}
-                        alt={`${product.title} video thumbnail`}
-                        className="w-full h-full object-cover"
+                    <div className="relative rounded-lg border border-border/50 bg-background/50 shadow-md overflow-hidden aspect-video md:col-span-1">
+                      <iframe
+                        src={product.videoURL}
+                        className="w-full h-full"
+                        frameBorder="0"
+                        scrolling="no"
+                        allowFullScreen
+                        title={`${product.title} video`}
                       />
                     </div>
                     <div className="md:col-span-2 flex flex-col justify-center">

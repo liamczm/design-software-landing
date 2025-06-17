@@ -13,6 +13,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { useCases } from "@/lib/use-cases"
 import SpotlightCard from "@/components/SpotlightCard"
 import ProductsSection from "@/components/products-section"
+import { HoleBackground } from "@/components/animate-ui/backgrounds/hole"
 
 
 export default function LandingPage() {
@@ -23,8 +24,13 @@ export default function LandingPage() {
         <header className="fixed top-0 z-50 w-full border-b border-border/40 bg-background/40 backdrop-blur-md">
           <div className="container flex h-16 items-center justify-between">
             <div className="flex items-center gap-2">
-              <Layers className="h-6 w-6 text-primary" />
-              <span className="text-xl font-bold">Designify</span>
+              <Image
+                src="/LogoLarge.svg"
+                alt="AIM Logo"
+                width={48}
+                height={48}
+                className="h-12 w-12"
+              />
             </div>
             <nav className="hidden md:flex items-center gap-6">
               <Link
@@ -54,12 +60,6 @@ export default function LandingPage() {
             </nav>
             <div className="flex items-center gap-4">
               <ThemeToggle />
-              <Link
-                href="#"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Log in
-              </Link>
               <AnimatedButton size="sm">Get Started</AnimatedButton>
             </div>
           </div>
@@ -68,15 +68,21 @@ export default function LandingPage() {
         <main className="flex-1">
           {/* Hero Section */}
           <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden min-h-[90vh] flex items-end">
-            {/* 优雅的静态背景渐变 */}
-            <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/90 -z-10" />
+            {/* HoleBackground 动态背景 */}
+            <HoleBackground 
+              className="absolute inset-0 -z-10"
+              strokeColor="#404040"
+              numberOfLines={40}
+              numberOfDiscs={30}
+              particleRGBColor={[100, 100, 100]}
+            />
             <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background/95 to-transparent pointer-events-none" />
 
             <div className="container relative pb-16 md:pb-24">
               <div className="max-w-2xl mb-0 md:mb-0 pl-0 md:pl-0">
                 <AnimatedContainer animation="fadeIn" duration={0.8}>
                   <AnimatedText
-                    text="Design the Future with Precision and Ease"
+            text="让设计回归设计"
                     tag="h1"
                     className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
                   />
@@ -482,7 +488,7 @@ export default function LandingPage() {
                 </StaggeredItem>
 
                 <StaggeredItem>
-                  <div className="rounded-lg border-2 border-primary bg-background/50 backdrop-blur-sm p-6 md:p-8 flex flex-col relative glow-border">
+                  <div className="rounded-lg border-2 border-primary bg-background/50 backdrop-blur-sm p-6 md:p-8 flex flex-col relative">
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
                       Most Popular
                     </div>
@@ -554,13 +560,13 @@ export default function LandingPage() {
             <div className="container">
               <AnimatedContainer animation="fadeIn">
                 <SpotlightCard
-                  className="max-w-4xl mx-auto bg-background/80 glow-border"
+                  className="max-w-4xl mx-auto bg-background/80"
                   spotlightColor="rgba(255, 85, 0, 0.2)"
                 >
                   <AnimatedText
                     text="Ready to Transform Your Design Process?"
                     tag="h2"
-                    className="text-3xl md:text-4xl font-bold tracking-tight mb-4 glow-text"
+                    className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
                   />
                   <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
                     Join thousands of designers who have already elevated their workflow with Designify. Start your free
@@ -587,8 +593,14 @@ export default function LandingPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
               <div className="col-span-2 lg:col-span-1">
                 <div className="flex items-center gap-2 mb-4">
-                  <Layers className="h-6 w-6 text-primary" />
-                  <span className="text-xl font-bold">Designify</span>
+                  <Image
+                src="/LogoLarge.svg"
+                alt="AIM Logo"
+                width={24}
+                height={24}
+                className="h-6 w-6"
+              />
+                  <span className="text-xl font-bold">AIM</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
                   Empowering designers to create the future through intuitive tools and seamless collaboration.

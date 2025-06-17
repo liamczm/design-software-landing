@@ -165,12 +165,11 @@ export default function AnimatedContainer({
           willChange: 'transform, opacity',
           transform: 'translateZ(0)' // 强制硬件加速
         }}
-        className={`${className} ${hidePricing ? "pricing-hidden" : ""} relative overflow-hidden rounded-lg backdrop-blur-sm transition-all duration-300 hover:shadow-md`}
+        className={`${className} ${hidePricing ? "pricing-hidden" : ""}`}
       >
         {title && <h3 className="text-xl font-medium mb-3">{title}</h3>}
         {summary && <p className="text-muted-foreground mb-4 max-w-prose">{summary}</p>}
-        <div className="relative z-10">{children}</div>
-        <div className="absolute inset-0 bg-gradient-to-br from-background/50 to-background/20 -z-10 opacity-50"></div>
+        {children}
       </motion.div>
     )
   }
@@ -248,7 +247,7 @@ export default function AnimatedContainer({
         delay,
         ease: "easeOut",
       }}
-      className={`${className} border border-border rounded-lg overflow-hidden bg-background/50 backdrop-blur-sm hover:shadow-md transition-all duration-300`}
+      className={`${className} border border-border rounded-lg overflow-hidden bg-background/50 backdrop-blur-sm`}
     >
       <div
         className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/20 transition-colors"

@@ -123,7 +123,7 @@ export default function ProductsPage() {
                 <AnimatedText
                   text="All Design Products"
                   tag="h1"
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 glow-text"
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6"
                 />
                 <p className="text-lg text-muted-foreground">
                   Explore our complete suite of design tools and find the perfect solution for your creative needs.
