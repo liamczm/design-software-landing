@@ -58,8 +58,65 @@ export function getIconComponent(iconName: string): ReactNode {
   }
 }
 
-// 将API产品数据转换为本地产品格式（不包含features和howto，这些从details获取）
-function transformApiProductToProduct(apiProduct: ApiProduct, features: ProductFeature[] = [], howto: ProductHowTo[] = []): Product {
+// 处理base64图片数据
+function processImageUrl(imageData: any): string {
+  if (typeof imageData === 'string') {
+    // 如果是base64数据，添加data URL前缀
+    if (imageData.startsWith('/9j/') || imageData.startsWith('iVBOR') || imageData.startsWith('UklGR')) {
+      return `data:image/jpeg;base64,${imageData}`
+    }
+    return imageData
+  }
+  return "/placeholder.svg?height=400&width=600&text=Image"
+}
+
+// 核心方法：将API产品数据转换为本地产品格式（包含完整的features和howto）
+async function transformApiProductToProduct(apiProduct: ApiProduct): Promise<Product> {
+  let features: ProductFeature[] = []
+  let howto: ProductHowTo[] = []
+  
+  // 如果产品有detailsId，获取详细信息
+  if (apiProduct.detailsId) {
+    try {
+      console.log(`获取产品详情，detailsId: ${apiProduct.detailsId}`)
+      const detailsResponse = await apiClient.getProductDetails(apiProduct.detailsId)
+      
+      if (detailsResponse.success && detailsResponse.data) {
+        const details = detailsResponse.data
+        
+        // 根据API响应结构处理数据 - API返回 {status: "success", details: {...}}
+        const actualDetails = details.details || details
+        
+        // 处理features数据
+        if (actualDetails.features && Array.isArray(actualDetails.features)) {
+          features = actualDetails.features.map((feature: any) => ({
+            id: feature._id || feature.id,
+            title: feature.title || '',
+            description: feature.description || '',
+            helps: Array.isArray(feature.helps) ? feature.helps : [],
+            image: processImageUrl(feature.image)
+          }))
+        }
+        
+        // 处理howto数据
+        if (actualDetails.howto && Array.isArray(actualDetails.howto)) {
+          howto = actualDetails.howto.map((step: any) => ({
+            id: step._id || step.id,
+            title: step.title || '',
+            description: step.description || '',
+            image: processImageUrl(step.image)
+          }))
+        }
+        
+        console.log(`成功获取 ${features.length} 个features 和 ${howto.length} 个howto项目`)
+      } else {
+        console.warn(`获取产品详情失败: ${detailsResponse.message}`)
+      }
+    } catch (error) {
+      console.error('获取产品详情时发生错误:', error)
+    }
+  }
+  
   return {
     id: apiProduct.id,
     title: apiProduct.title,
@@ -76,19 +133,7 @@ function transformApiProductToProduct(apiProduct: ApiProduct, features: ProductF
   }
 }
 
-// 处理base64图片数据
-function processImageUrl(imageData: any): string {
-  if (typeof imageData === 'string') {
-    // 如果是base64数据，添加data URL前缀
-    if (imageData.startsWith('/9j/') || imageData.startsWith('iVBOR') || imageData.startsWith('UklGR')) {
-      return `data:image/jpeg;base64,${imageData}`
-    }
-    return imageData
-  }
-  return "/placeholder.svg?height=400&width=600&text=Image"
-}
-
-// 获取所有产品（不包含详情）
+// 获取所有产品（包含完整的详情信息）
 export async function getAllProducts(): Promise<Product[]> {
   try {
     const response = await apiClient.getProducts()
@@ -96,11 +141,14 @@ export async function getAllProducts(): Promise<Product[]> {
     if (response.success && response.data) {
       // 处理API响应，确保获取正确的产品数组
       const responseData = response.data as any
-      const products = Array.isArray(responseData) ? responseData : (responseData.products || [])
+      const apiProducts = Array.isArray(responseData) ? responseData : (responseData.products || [])
       
-      return products.map((apiProduct: ApiProduct) => 
-        transformApiProductToProduct(apiProduct, [], [])
+      // 并行获取所有产品的完整信息
+      const productPromises = apiProducts.map((apiProduct: ApiProduct) => 
+        transformApiProductToProduct(apiProduct)
       )
+      
+      return await Promise.all(productPromises)
     } else {
       console.error('获取产品列表失败:', response.message)
       return []
@@ -111,161 +159,75 @@ export async function getAllProducts(): Promise<Product[]> {
   }
 }
 
-// 通过ID获取产品（不包含详情）
-export async function getProductById(id: number): Promise<Product | null> {
+// 获取产品列表（仅基本信息，不包含详情）- 用于首页等不需要详情的页面
+export async function getProductsBasicInfo(): Promise<Product[]> {
   try {
-    const response = await apiClient.getProductById(id)
+    const response = await apiClient.getProducts()
     
     if (response.success && response.data) {
-      return transformApiProductToProduct(response.data, [], [])
+      const responseData = response.data as any
+      const apiProducts = Array.isArray(responseData) ? responseData : (responseData.products || [])
+      
+      return apiProducts.map((apiProduct: ApiProduct) => ({
+        id: apiProduct.id,
+        title: apiProduct.title,
+        subtitle: apiProduct.subtitle,
+        icon: apiProduct.icon || "layers",
+        tag: apiProduct.tag,
+        slug: apiProduct.slug,
+        description: apiProduct.description,
+        features: [], // 基本信息不包含详情
+        howto: [],   // 基本信息不包含详情
+        videoURL: apiProduct.videoURL,
+        image: apiProduct.image,
+        detailsId: apiProduct.detailsId
+      }))
     } else {
-      console.error('获取产品失败:', response.message)
-      return null
+      console.error('获取产品列表失败:', response.message)
+      return []
     }
   } catch (error) {
-    console.error('获取产品时发生错误:', error)
-    return null
+    console.error('获取产品列表时发生错误:', error)
+    return []
   }
 }
 
-// 通过Slug获取产品（不包含详情）- 修复版本：从产品列表中查找
+// 通过slug获取完整产品信息（包含features和howto）
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   try {
-    // 改为从产品列表中查找对应的slug，避免调用有问题的单个产品API
-    const allProducts = await getAllProducts()
-    const product = allProducts.find(p => p.slug === slug)
+    console.log(`通过slug获取产品: ${slug}`)
     
-    if (product) {
-      return product
-    } else {
+    // 先获取产品基本信息列表
+    const response = await apiClient.getProducts()
+    
+    if (!response.success || !response.data) {
+      console.error('获取产品列表失败:', response.message)
+      return null
+    }
+    
+    const responseData = response.data as any
+    const apiProducts = Array.isArray(responseData) ? responseData : (responseData.products || [])
+    
+    // 找到对应slug的产品
+    const apiProduct = apiProducts.find((p: ApiProduct) => p.slug === slug)
+    
+    if (!apiProduct) {
       console.error('未找到对应slug的产品:', slug)
       return null
     }
+    
+    // 使用transformApiProductToProduct获取完整产品信息
+    return await transformApiProductToProduct(apiProduct)
   } catch (error) {
     console.error('通过slug获取产品时发生错误:', error)
     return null
   }
 }
 
-// 获取产品详情（包含features和howto）
-export async function getProductDetails(detailsId: number): Promise<{ features: ProductFeature[], howto: ProductHowTo[] } | null> {
-  try {
-    const response = await apiClient.getProductDetails(detailsId)
-    
-    if (response.success && response.data) {
-      const details = response.data
-      
-      // 处理features数据
-      const features: ProductFeature[] = []
-      if (details.features && Array.isArray(details.features)) {
-        details.features.forEach((feature: any) => {
-          features.push({
-            id: feature.id,
-            title: feature.title || '',
-            description: feature.description || '',
-            helps: Array.isArray(feature.helps) ? feature.helps : [],
-            image: processImageUrl(feature.image)
-          })
-        })
-      }
-      
-      // 处理howto数据
-      const howto: ProductHowTo[] = []
-      if (details.howto && Array.isArray(details.howto)) {
-        details.howto.forEach((step: any) => {
-          howto.push({
-            id: step.id,
-            title: step.title || '',
-            description: step.description || '',
-            image: processImageUrl(step.image)
-          })
-        })
-      }
-      
-      return { features, howto }
-    } else {
-      console.error('获取产品详情失败:', response.message)
-      return null
-    }
-  } catch (error) {
-    console.error('获取产品详情时发生错误:', error)
-    return null
-  }
-}
-
-// 获取完整产品信息（包含features和howto）
-export async function getFullProductBySlug(slug: string): Promise<Product | null> {
-  try {
-    // 首先通过slug获取产品基本信息
-    const product = await getProductBySlug(slug)
-    
-    if (!product) {
-      console.error('产品未找到:', slug)
-      return null
-    }
-    
-    // 如果没有detailsId，返回基本产品信息（没有features和howto）
-    if (!product.detailsId) {
-      console.warn('产品缺少detailsId，返回基本信息:', slug)
-      return product
-    }
-    
-    // 使用产品的detailsId获取详细信息
-    console.log('获取产品详情，detailsId:', product.detailsId)
-    const detailsResponse = await apiClient.getProductDetails(product.detailsId)
-    
-    if (detailsResponse.success && detailsResponse.data) {
-      const detailsData = detailsResponse.data as any
-      
-      // 提取features和howto数据
-      const features = detailsData.features || []
-      const howto = detailsData.howto || []
-      
-      console.log(`获取到 ${features.length} 个features 和 ${howto.length} 个howto项目`)
-      
-      // 转换为组件所需的格式
-      const transformedFeatures = features.map((feature: any) => ({
-        id: feature._id || feature.id,
-        title: feature.title || '',
-        description: feature.description || '',
-        helps: Array.isArray(feature.helps) ? feature.helps : [],
-        image: feature.image || ''
-      }))
-      
-      const transformedHowto = howto.map((item: any) => ({
-        id: item._id || item.id,
-        title: item.title || '',
-        description: item.description || '',
-        image: item.image || ''
-      }))
-      
-      // 返回包含详细信息的完整产品
-      return {
-        ...product,
-        features: transformedFeatures,
-        howto: transformedHowto
-      }
-    } else {
-      console.error('获取产品详情失败:', detailsResponse.message)
-      // 即使详情获取失败，也返回基本产品信息
-      return product
-    }
-  } catch (error) {
-    console.error('获取完整产品信息时发生错误:', error)
-    // 尝试返回基本产品信息
-    try {
-      return await getProductBySlug(slug)
-    } catch (fallbackError) {
-      console.error('获取基本产品信息也失败:', fallbackError)
-      return null
-    }
-  }
-}
-
-// 获取相关产品
+// 获取相关产品（基本信息）
 export async function getRelatedProducts(currentId: number, limit = 2): Promise<Product[]> {
   try {
-    const allProducts = await getAllProducts()
+    const allProducts = await getProductsBasicInfo()
     return allProducts
       .filter((product) => product.id !== currentId)
       .sort(() => 0.5 - Math.random())

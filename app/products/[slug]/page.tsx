@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, use } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, Check } from "lucide-react"
@@ -9,15 +9,16 @@ import AnimatedContainer from "@/components/animated-container"
 import AnimatedButton from "@/components/animated-button"
 import PageTransition from "@/components/page-transition"
 import HorizontalSteps from "@/components/horizontal-steps"
-import { getFullProductBySlug, getRelatedProducts, getIconComponent, type Product } from "@/lib/product-service"
+import { getProductBySlug, getRelatedProducts, getIconComponent, type Product } from "@/lib/product-service"
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
+  const resolvedParams = use(params)
   const [product, setProduct] = useState<Product | null>(null)
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -29,7 +30,7 @@ export default function ProductPage({ params }: ProductPageProps) {
       setError(null)
 
       try {
-        const productData = await getFullProductBySlug(params.slug)
+        const productData = await getProductBySlug(resolvedParams.slug)
         
         if (!productData) {
           notFound()
@@ -50,7 +51,7 @@ export default function ProductPage({ params }: ProductPageProps) {
     }
 
     loadProduct()
-  }, [params.slug])
+  }, [resolvedParams.slug])
 
   if (isLoading) {
     return (
@@ -151,7 +152,7 @@ export default function ProductPage({ params }: ProductPageProps) {
           <AnimatedContainer animation="slideUp" delay={0.3} duration={0.8}>
             <div className="relative rounded-lg border border-border/50 bg-background/50 shadow-lg overflow-hidden glow-border">
               <Image
-                src={product.features[0]?.image || product.image || "/placeholder.svg?height=600&width=800"}
+                src={product.image || "/placeholder.svg?height=600&width=800"}
                 width={800}
                 height={600}
                 alt={product.title}

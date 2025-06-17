@@ -9,7 +9,7 @@ import StaggeredItem from "@/components/staggered-item"
 import FeatureCard from "@/components/feature-card"
 import AnimatedButton from "@/components/animated-button"
 import ProductsSectionSkeleton from "@/components/products-section-skeleton"
-import { getAllProducts, getIconComponent, type Product } from "@/lib/product-service"
+import { getProductsBasicInfo, getIconComponent, type Product } from "@/lib/product-service"
 
 export default function ProductsSection() {
   const [products, setProducts] = useState<Product[]>([])
@@ -22,7 +22,7 @@ export default function ProductsSection() {
       setError(null)
 
       try {
-        const allProducts = await getAllProducts()
+        const allProducts = await getProductsBasicInfo()
         setProducts(allProducts.slice(0, 6)) // 只显示前6个产品
       } catch (error) {
         console.error('加载产品失败:', error)

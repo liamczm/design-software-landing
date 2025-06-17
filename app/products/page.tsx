@@ -11,7 +11,7 @@ import PageTransition from "@/components/page-transition"
 import FeatureCard from "@/components/feature-card"
 import AnimatedButton from "@/components/animated-button"
 import ProductsSectionSkeleton from "@/components/products-section-skeleton"
-import { getAllProducts, getIconComponent, type Product } from "@/lib/product-service"
+import { getProductsBasicInfo, getIconComponent, type Product } from "@/lib/product-service"
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([])
@@ -25,7 +25,7 @@ export default function ProductsPage() {
       setError(null)
 
       try {
-        const allProducts = await getAllProducts()
+        const allProducts = await getProductsBasicInfo()
         setProducts(allProducts)
       } catch (error) {
         console.error('加载产品失败:', error)
@@ -146,7 +146,7 @@ export default function ProductsPage() {
                       size="sm"
                       variant={selectedTag === tag ? "secondary" : "outline"}
                       className="rounded-full"
-                      onClick={() => setSelectedTag(tag)}
+                      onClick={() => setSelectedTag(tag || "")}
                     >
                       {tag}
                     </AnimatedButton>

@@ -13,7 +13,6 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { useCases } from "@/lib/use-cases"
 import SpotlightCard from "@/components/SpotlightCard"
 import ProductsSection from "@/components/products-section"
-import ApiTest from "@/components/api-test"
 
 
 export default function LandingPage() {
@@ -299,15 +298,6 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
-
-          {/* API Test Section */}
-          <section className="py-16 md:py-24 bg-background/95">
-            <div className="container">
-              <AnimatedContainer animation="fadeIn" className="max-w-4xl mx-auto">
-                <ApiTest />
-              </AnimatedContainer>
             </div>
           </section>
 
