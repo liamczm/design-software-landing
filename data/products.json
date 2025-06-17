@@ -1,0 +1,466 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "设计易UI",
+      "subtitle": "直观的UI设计工具",
+      "icon": "zap",
+      "tag": "设计",
+      "slug": "designify-ui",
+      "description": "一款功能强大的UI设计工具，具有拖放功能、预构建组件和智能布局工具，可简化您的设计工作流程。",
+      "videoURL": "https://example.com/videos/designify-ui-demo.mp4",
+      "image": "/placeholder.svg?height=600&width=800&text=设计易UI",
+      "features": [
+        {
+          "id": 101,
+          "title": "拖放编辑器",
+          "description": "使用我们直观的拖放编辑器创建精美界面，让初学者和专业人士都能轻松设计。",
+          "helps": ["将设计时间减少高达40%", "无需复杂编码", "使设计迭代快速且无痛"],
+          "image": "/placeholder.svg?height=400&width=600&text=拖放编辑器"
+        },
+        {
+          "id": 102,
+          "title": "组件库",
+          "description": "访问数百个预构建的、可自定义的组件，加快设计过程并保持一致性。",
+          "helps": ["确保跨项目的设计一致性", "使用现成元素节省时间", "允许轻松自定义以匹配您的品牌"],
+          "image": "/placeholder.svg?height=400&width=600&text=组件库"
+        },
+        {
+          "id": 103,
+          "title": "智能布局工具",
+          "description": "通过适应您设计需求的智能布局辅助功能，自动对齐和分布元素。",
+          "helps": ["自动创建像素完美的设计", "保持适当的间距和对齐", "为不同屏幕尺寸调整布局"],
+          "image": "/placeholder.svg?height=400&width=600&text=智能布局工具"
+        }
+      ],
+      "howto": [
+        {
+          "id": 1,
+          "title": "开始您的项目",
+          "description": "从空白画布开始，或从为各种用例设计的数十个模板中选择。",
+          "image": "/placeholder.svg?height=400&width=600&text=开始项目"
+        },
+        {
+          "id": 2,
+          "title": "添加组件",
+          "description": "从库中拖动组件到画布上，并排列它们以创建您的布局。",
+          "image": "/placeholder.svg?height=400&width=600&text=添加组件"
+        },
+        {
+          "id": 3,
+          "title": "自定义设计",
+          "description": "调整颜色、排版和间距，以匹配您的品牌标识和设计要求。",
+          "image": "/placeholder.svg?height=400&width=600&text=自定义设计"
+        },
+        {
+          "id": 4,
+          "title": "预览和测试",
+          "description": "在不同设备和屏幕尺寸上预览您的设计，确保响应性。",
+          "image": "/placeholder.svg?height=400&width=600&text=预览和测试"
+        },
+        {
+          "id": 5,
+          "title": "导出和分享",
+          "description": "以各种格式导出您的设计，或直接与您的团队分享以进行协作。",
+          "image": "/placeholder.svg?height=400&width=600&text=导出和分享"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "设计易原型",
+      "subtitle": "交互式原型设计工具",
+      "icon": "layers",
+      "tag": "原型设计",
+      "slug": "designify-prototype",
+      "description": "创建交互式原型，通过动画、过渡和条件逻辑模拟真实用户体验，无需编写代码。",
+      "videoURL": "https://example.com/videos/designify-prototype-demo.mp4",
+      "image": "/placeholder.svg?height=600&width=800&text=设计易原型",
+      "features": [
+        {
+          "id": 201,
+          "title": "交互式连接",
+          "description": "通过交互式热点链接屏幕，创建真实的用户流程和导航路径。",
+          "helps": ["在开发前测试用户旅程", "向开发人员清晰传达交互", "及早发现可用性问题"],
+          "image": "/placeholder.svg?height=400&width=600&text=交互式连接"
+        },
+        {
+          "id": 202,
+          "title": "动画库",
+          "description": "从数十种预构建动画中选择，或创建自定义过渡，为您的界面注入生命力。",
+          "helps": ["通过动效增强用户体验", "为交互提供视觉反馈", "创建更具吸引力的界面"],
+          "image": "/placeholder.svg?height=400&width=600&text=动画库"
+        },
+        {
+          "id": 203,
+          "title": "条件逻辑",
+          "description": "使用if/then条件和变量构建复杂原型，响应用户输入和操作。",
+          "helps": ["创建真实的交互体验", "测试不同的用户场景", "模拟动态内容和状态"],
+          "image": "/placeholder.svg?height=400&width=600&text=条件逻辑"
+        }
+      ],
+      "howto": [
+        {
+          "id": 1,
+          "title": "导入设计",
+          "description": "从设计易UI或其他设计工具导入您的设计，作为原型的基础。",
+          "image": "/placeholder.svg?height=400&width=600&text=导入设计"
+        },
+        {
+          "id": 2,
+          "title": "创建连接",
+          "description": "添加交互式热点以连接屏幕，并为您的原型定义导航路径。",
+          "image": "/placeholder.svg?height=400&width=600&text=创建连接"
+        },
+        {
+          "id": 3,
+          "title": "添加动画",
+          "description": "为元素应用过渡和动画，创建更动态和吸引人的体验。",
+          "image": "/placeholder.svg?height=400&width=600&text=添加动画"
+        },
+        {
+          "id": 4,
+          "title": "设置条件",
+          "description": "定义条件逻辑，根据用户交互和输入创建不同路径。",
+          "image": "/placeholder.svg?height=400&width=600&text=设置条件"
+        },
+        {
+          "id": 5,
+          "title": "测试和分享",
+          "description": "在不同设备上预览您的原型，并与利益相关者分享以获取反馈。",
+          "image": "/placeholder.svg?height=400&width=600&text=测试和分享"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "设计易协作",
+      "subtitle": "团队协作平台",
+      "icon": "users",
+      "tag": "协作",
+      "slug": "designify-collab",
+      "description": "一个全面的协作平台，具有实时编辑、评论和版本控制功能，简化团队工作流程。",
+      "videoURL": "",
+      "image": "/placeholder.svg?height=600&width=800&text=设计易协作",
+      "features": [
+        {
+          "id": 301,
+          "title": "实时编辑",
+          "description": "与团队成员同时在同一设计文件上工作，实时更新和变更对所有人可见。",
+          "helps": ["消除等待文件交接的时间", "加快反馈和迭代周期", "改善团队协调"],
+          "image": "/placeholder.svg?height=400&width=600&text=实时编辑"
+        },
+        {
+          "id": 302,
+          "title": "评论系统",
+          "description": "直接在设计上留下上下文反馈，通过线程对话保持讨论有序。",
+          "helps": ["将反馈集中在一处", "为评论提供清晰上下文", "创建设计决策记录"],
+          "image": "/placeholder.svg?height=400&width=600&text=评论系统"
+        },
+        {
+          "id": 303,
+          "title": "版本历史",
+          "description": "通过全面的版本控制，跟踪随时间的变化，并在需要时恢复到以前的版本。",
+          "helps": ["防止工作丢失", "允许探索不同设计方向", "记录设计的演变"],
+          "image": "/placeholder.svg?height=400&width=600&text=版本历史"
+        }
+      ],
+      "howto": [
+        {
+          "id": 1,
+          "title": "创建团队",
+          "description": "设置您的团队并邀请成员，分配适当的权限和访问级别。",
+          "image": "/placeholder.svg?height=400&width=600&text=创建团队"
+        },
+        {
+          "id": 2,
+          "title": "分享项目",
+          "description": "与团队成员和外部利益相关者分享设计项目，可自定义权限。",
+          "image": "/placeholder.svg?height=400&width=600&text=分享项目"
+        },
+        {
+          "id": 3,
+          "title": "实时协作",
+          "description": "与多个团队成员同时在设计文件上实时工作。",
+          "image": "/placeholder.svg?height=400&width=600&text=实时协作"
+        },
+        {
+          "id": 4,
+          "title": "提供反馈",
+          "description": "直接在设计上留下评论和注释，提供具体反馈。",
+          "image": "/placeholder.svg?height=400&width=600&text=提供反馈"
+        },
+        {
+          "id": 5,
+          "title": "跟踪变更",
+          "description": "查看版本历史并比较不同迭代，了解设计如何演变。",
+          "image": "/placeholder.svg?height=400&width=600&text=跟踪变更"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "设计易系统",
+      "subtitle": "设计系统管理",
+      "icon": "grid",
+      "tag": "系统",
+      "slug": "designify-systems",
+      "description": "构建和维护全面的设计系统，包括组件库、样式指南和文档，确保一致性。",
+      "videoURL": "https://example.com/videos/designify-systems-intro.mp4",
+      "image": "/placeholder.svg?height=600&width=800&text=设计易系统",
+      "features": [
+        {
+          "id": 401,
+          "title": "组件管理",
+          "description": "创建、组织和维护可重用组件库，包含属性、变体和文档。",
+          "helps": ["确保跨产品的设计一致性", "加快设计和开发速度", "简化更新和维护"],
+          "image": "/placeholder.svg?height=400&width=600&text=组件管理"
+        },
+        {
+          "id": 402,
+          "title": "样式指南生成器",
+          "description": "从您的设计资产自动生成全面的样式指南，包括颜色、排版和间距。",
+          "helps": ["保持品牌一致性", "为设计师和开发人员提供清晰参考", "自动化文档过程"],
+          "image": "/placeholder.svg?height=400&width=600&text=样式指南生成器"
+        },
+        {
+          "id": 403,
+          "title": "设计令牌",
+          "description": "定义和管理设计变量，通过单一更改可以在整个系统中更新。",
+          "helps": ["为设计值创建单一真实来源", "简化主题创建和切换", "简化设计系统更新"],
+          "image": "/placeholder.svg?height=400&width=600&text=设计令牌"
+        }
+      ],
+      "howto": [
+        {
+          "id": 1,
+          "title": "定义基础",
+          "description": "建立设计系统的基础，包括颜色、排版、间距和其他核心元素。",
+          "image": "/placeholder.svg?height=400&width=600&text=定义基础"
+        },
+        {
+          "id": 2,
+          "title": "创建组件",
+          "description": "构建可重用组件库，包含变体、属性和使用指南。",
+          "image": "/placeholder.svg?height=400&width=600&text=创建组件"
+        },
+        {
+          "id": 3,
+          "title": "编写指南",
+          "description": "为如何正确使用组件和应用设计原则编写清晰文档。",
+          "image": "/placeholder.svg?height=400&width=600&text=编写指南"
+        },
+        {
+          "id": 4,
+          "title": "分享和分发",
+          "description": "通过适当的版本控制和变更管理，使您的设计系统对团队可用。",
+          "image": "/placeholder.svg?height=400&width=600&text=分享和分发"
+        },
+        {
+          "id": 5,
+          "title": "维护和更新",
+          "description": "定期审查和更新您的设计系统，保持其相关性并与产品需求保持一致。",
+          "image": "/placeholder.svg?height=400&width=600&text=维护和更新"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "设计易响应",
+      "subtitle": "响应式设计工具",
+      "icon": "monitor",
+      "tag": "响应式",
+      "slug": "designify-responsive",
+      "description": "创建在所有设备上完美运行的设计，具有自适应布局、响应式组件和设备预览工具。",
+      "videoURL": "https://example.com/videos/designify-responsive-demo.mp4",
+      "image": "/placeholder.svg?height=600&width=800&text=设计易响应",
+      "features": [
+        {
+          "id": 501,
+          "title": "自适应布局",
+          "description": "设计能够通过灵活网格和容器自动调整到不同屏幕尺寸的布局。",
+          "helps": ["确保跨设备的一致体验", "减少在特定设备设计上花费的时间", "防止在不同屏幕上出现布局问题"],
+          "image": "/placeholder.svg?height=400&width=600&text=自适应布局"
+        },
+        {
+          "id": 502,
+          "title": "设备预览",
+          "description": "立即在各种设备尺寸和方向上预览您的设计，确保正确显示。",
+          "helps": ["及早发现响应式问题", "在流行设备尺寸上测试设计", "验证跨断点的设计决策"],
+          "image": "/placeholder.svg?height=400&width=600&text=设备预览"
+        },
+        {
+          "id": 503,
+          "title": "响应式组件",
+          "description": "使用能够智能适应其容器大小并保持适当比例的组件。",
+          "helps": ["创建跨屏幕一致的组件行为", "简化响应式设计实现", "在所有尺寸上保持设计完整性"],
+          "image": "/placeholder.svg?height=400&width=600&text=响应式组件"
+        }
+      ],
+      "howto": [
+        {
+          "id": 1,
+          "title": "设置网格系统",
+          "description": "为不同屏幕尺寸定义响应式网格系统，包括断点和列配置。",
+          "image": "/placeholder.svg?height=400&width=600&text=设置网格系统"
+        },
+        {
+          "id": 2,
+          "title": "移动优先设计",
+          "description": "从移动布局开始，遵循最佳实践逐步增强更大屏幕。",
+          "image": "/placeholder.svg?height=400&width=600&text=移动优先设计"
+        },
+        {
+          "id": 3,
+          "title": "应用响应式规则",
+          "description": "配置元素在不同断点应如何适应，使用响应式属性和约束。",
+          "image": "/placeholder.svg?height=400&width=600&text=应用响应式规则"
+        },
+        {
+          "id": 4,
+          "title": "跨设备测试",
+          "description": "在不同设备尺寸上预览和测试您的设计，确保正确显示和功能。",
+          "image": "/placeholder.svg?height=400&width=600&text=跨设备测试"
+        },
+        {
+          "id": 5,
+          "title": "导出响应式代码",
+          "description": "生成适用于所有平台和设备的响应式代码，具有适当的媒体查询。",
+          "image": "/placeholder.svg?height=400&width=600&text=导出响应式代码"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "设计易移动",
+      "subtitle": "移动应用设计工具",
+      "icon": "smartphone",
+      "tag": "移动",
+      "slug": "designify-mobile",
+      "description": "专为创建卓越移动体验而优化的移动设计工具，支持触摸手势和原生组件。",
+      "videoURL": "https://example.com/videos/designify-mobile-demo.mp4",
+      "image": "/placeholder.svg?height=600&width=800&text=设计易移动",
+      "features": [
+        {
+          "id": 601,
+          "title": "触摸手势",
+          "description": "设计和测试触摸交互，如滑动、捏合和点击，创建真实的移动体验。",
+          "helps": ["创建符合用户期望的自然交互", "测试复杂的手势模式", "提高移动应用的可用性"],
+          "image": "/placeholder.svg?height=400&width=600&text=触摸手势"
+        },
+        {
+          "id": 602,
+          "title": "移动组件",
+          "description": "使用专为移动界面优化的UI组件，遵循平台设计指南。",
+          "helps": ["加快移动应用设计", "确保符合平台标准", "创建一致的用户体验"],
+          "image": "/placeholder.svg?height=400&width=600&text=移动组件"
+        },
+        {
+          "id": 603,
+          "title": "设备测试",
+          "description": "在特定移动设备模型上预览您的设计，确保完美适配。",
+          "helps": ["验证设计在真实设备上的外观", "发现特定设备的问题", "优化不同屏幕尺寸的体验"],
+          "image": "/placeholder.svg?height=400&width=600&text=设备测试"
+        }
+      ],
+      "howto": [
+        {
+          "id": 1,
+          "title": "选择设备",
+          "description": "选择目标移动设备和平台，设置适当的屏幕尺寸和约束。",
+          "image": "/placeholder.svg?height=400&width=600&text=选择设备"
+        },
+        {
+          "id": 2,
+          "title": "创建界面",
+          "description": "使用移动优化组件构建用户界面，遵循平台设计指南。",
+          "image": "/placeholder.svg?height=400&width=600&text=创建界面"
+        },
+        {
+          "id": 3,
+          "title": "添加交互",
+          "description": "设计触摸手势和交互，创建流畅的用户体验。",
+          "image": "/placeholder.svg?height=400&width=600&text=添加交互"
+        },
+        {
+          "id": 4,
+          "title": "测试性能",
+          "description": "评估设计的性能影响，确保流畅的用户体验。",
+          "image": "/placeholder.svg?height=400&width=600&text=测试性能"
+        },
+        {
+          "id": 5,
+          "title": "导出资源",
+          "description": "为开发人员导出优化的移动资源和规范。",
+          "image": "/placeholder.svg?height=400&width=600&text=导出资源"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "设计易品牌",
+      "subtitle": "品牌标识设计工具",
+      "icon": "palette",
+      "tag": "品牌",
+      "slug": "designify-brand",
+      "description": "全面的品牌标识设计工具，帮助创建一致的品牌形象，包括标志、色彩系统和排版。",
+      "videoURL": "",
+      "image": "/placeholder.svg?height=600&width=800&text=设计易品牌",
+      "features": [
+        {
+          "id": 701,
+          "title": "标志设计",
+          "description": "使用专业的矢量编辑工具创建独特而有记忆力的标志。",
+          "helps": ["建立品牌识别", "创建适应不同场景的标志变体", "确保标志在各种尺寸下的清晰度"],
+          "image": "/placeholder.svg?height=400&width=600&text=标志设计"
+        },
+        {
+          "id": 702,
+          "title": "色彩系统",
+          "description": "开发全面的色彩系统，包括主色、辅助色和功能色。",
+          "helps": ["建立一致的品牌色彩", "确保色彩的可访问性", "创建适应不同媒介的色彩变体"],
+          "image": "/placeholder.svg?height=400&width=600&text=色彩系统"
+        },
+        {
+          "id": 703,
+          "title": "排版系统",
+          "description": "选择和配置反映品牌个性的字体和排版规则。",
+          "helps": ["建立一致的文字表达", "确保跨平台的可读性", "创建清晰的排版层次"],
+          "image": "/placeholder.svg?height=400&width=600&text=排版系统"
+        }
+      ],
+      "howto": [
+        {
+          "id": 1,
+          "title": "品牌调研",
+          "description": "分析市场、竞争对手和目标受众，确定品牌定位。",
+          "image": "/placeholder.svg?height=400&width=600&text=品牌调研"
+        },
+        {
+          "id": 2,
+          "title": "概念开发",
+          "description": "创建多个设计概念，探索不同的视觉方向。",
+          "image": "/placeholder.svg?height=400&width=600&text=概念开发"
+        },
+        {
+          "id": 3,
+          "title": "细化设计",
+          "description": "完善选定的概念，调整细节和比例。",
+          "image": "/placeholder.svg?height=400&width=600&text=细化设计"
+        },
+        {
+          "id": 4,
+          "title": "创建变体",
+          "description": "为不同应用场景开发标志和品牌元素的变体。",
+          "image": "/placeholder.svg?height=400&width=600&text=创建变体"
+        },
+        {
+          "id": 5,
+          "title": "编写指南",
+          "description": "创建全面的品牌指南，确保一致的应用。",
+          "image": "/placeholder.svg?height=400&width=600&text=编写指南"
+        }
+      ]
+    }
+  ]
+}
