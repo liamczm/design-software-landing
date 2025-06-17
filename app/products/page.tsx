@@ -16,19 +16,23 @@ import { getAllProducts, getIconComponent, type Product } from "@/lib/product-se
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [selectedTag, setSelectedTag] = useState<string>("All Products")
 
   useEffect(() => {
-    // 模拟加载延迟
     const loadProducts = async () => {
       setIsLoading(true)
+      setError(null)
 
-      // 模拟网络延迟
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-
-      const allProducts = getAllProducts()
-      setProducts(allProducts)
-      setIsLoading(false)
+      try {
+        const allProducts = await getAllProducts()
+        setProducts(allProducts)
+      } catch (error) {
+        console.error('加载产品失败:', error)
+        setError('加载产品失败，请稍后重试')
+      } finally {
+        setIsLoading(false)
+      }
     }
 
     loadProducts()
@@ -37,7 +41,7 @@ export default function ProductsPage() {
   const filteredProducts =
     selectedTag === "All Products" ? products : products.filter((product) => product.tag === selectedTag)
 
-  const uniqueTags = Array.from(new Set(products.map((p) => p.tag)))
+  const uniqueTags = Array.from(new Set(products.map((p) => p.tag).filter(Boolean)))
 
   if (isLoading) {
     return (
@@ -57,6 +61,40 @@ export default function ProductsPage() {
                 </div>
 
                 <ProductsSectionSkeleton showTitle={true} itemCount={7} />
+              </div>
+            </section>
+          </main>
+        </div>
+      </PageTransition>
+    )
+  }
+
+  if (error) {
+    return (
+      <PageTransition>
+        <div className="flex min-h-screen flex-col">
+          <main className="flex-1 pt-16">
+            <section className="py-8 md:py-12 bg-background/95">
+              <div className="container">
+                <div className="flex items-center mb-8">
+                  <Link
+                    href="/"
+                    className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Back to Home
+                  </Link>
+                </div>
+
+                <div className="max-w-2xl mx-auto text-center">
+                  <p className="text-lg text-destructive mb-4">{error}</p>
+                  <AnimatedButton 
+                    onClick={() => window.location.reload()} 
+                    variant="outline"
+                  >
+                    重新加载
+                  </AnimatedButton>
+                </div>
               </div>
             </section>
           </main>
@@ -123,7 +161,7 @@ export default function ProductsPage() {
                       icon={getIconComponent(product.icon)}
                       title={product.title}
                       description={product.description}
-                      slug={product.slug}
+                      slug={product.slug || ''}
                       linkPath="/products/"
                     />
                   </StaggeredItem>

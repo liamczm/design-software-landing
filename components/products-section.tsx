@@ -14,18 +14,22 @@ import { getAllProducts, getIconComponent, type Product } from "@/lib/product-se
 export default function ProductsSection() {
   const [products, setProducts] = useState<Product[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    // 减少模拟加载延迟以提高性能
     const loadProducts = async () => {
       setIsLoading(true)
+      setError(null)
 
-      // 减少模拟网络延迟
-      await new Promise((resolve) => setTimeout(resolve, 300))
-
-      const allProducts = getAllProducts().slice(0, 6) // 只显示前6个产品
-      setProducts(allProducts)
-      setIsLoading(false)
+      try {
+        const allProducts = await getAllProducts()
+        setProducts(allProducts.slice(0, 6)) // 只显示前6个产品
+      } catch (error) {
+        console.error('加载产品失败:', error)
+        setError('加载产品失败，请稍后重试')
+      } finally {
+        setIsLoading(false)
+      }
     }
 
     loadProducts()
@@ -33,6 +37,24 @@ export default function ProductsSection() {
 
   if (isLoading) {
     return <ProductsSectionSkeleton showTitle={true} itemCount={6} />
+  }
+
+  if (error) {
+    return (
+      <section id="products" className="py-16 md:py-24 bg-background/95">
+        <div className="container">
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-lg text-destructive mb-4">{error}</p>
+            <AnimatedButton 
+              onClick={() => window.location.reload()} 
+              variant="outline"
+            >
+              重新加载
+            </AnimatedButton>
+          </div>
+        </div>
+      </section>
+    )
   }
 
   return (
@@ -56,7 +78,7 @@ export default function ProductsSection() {
                 icon={getIconComponent(product.icon)}
                 title={product.title}
                 description={product.description}
-                slug={product.slug}
+                slug={product.slug || ''}
                 linkPath="/products/"
               />
             </StaggeredItem>
