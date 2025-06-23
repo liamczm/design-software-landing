@@ -91,8 +91,7 @@ export default function LandingPage() {
 
                 <AnimatedContainer animation="fadeIn" delay={0.2} duration={0.8}>
                   <p className="text-xl text-muted-foreground mb-8 md:mb-10">
-                    The all-in-one design platform that empowers creators to bring their visions to life with intuitive
-                    tools, seamless collaboration, and limitless possibilities.
+                    数据驱动，一模到底的方案设计平台
                   </p>
                 </AnimatedContainer>
 
