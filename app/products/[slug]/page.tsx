@@ -10,12 +10,15 @@ import AnimatedButton from "@/components/animated-button"
 import PageTransition from "@/components/page-transition"
 import HorizontalSteps from "@/components/horizontal-steps"
 import { getProductBySlug, getRelatedProducts, getIconComponent, type Product } from "@/lib/product-service"
+import { Features } from "@/components/ui/features"
 
 interface ProductPageProps {
   params: Promise<{
     slug: string
   }>
 }
+
+
 
 export default function ProductPage({ params }: ProductPageProps) {
   const resolvedParams = use(params)
@@ -56,27 +59,27 @@ export default function ProductPage({ params }: ProductPageProps) {
   if (isLoading) {
     return (
       <PageTransition>
-        <div className="container py-12 md:py-16">
+        <div className="container py-8 md:py-12">
           <Link
             href="/#products"
-            className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mb-8"
+            className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mb-6"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to all products
           </Link>
 
           <div className="animate-pulse">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-12">
               <div>
-                <div className="h-6 bg-muted rounded mb-4 w-32"></div>
-                <div className="h-12 bg-muted rounded mb-6"></div>
-                <div className="h-6 bg-muted rounded mb-8 w-3/4"></div>
-                <div className="flex gap-4">
-                  <div className="h-12 bg-muted rounded w-32"></div>
-                  <div className="h-12 bg-muted rounded w-32"></div>
+                <div className="h-5 bg-muted rounded mb-3 w-24"></div>
+                <div className="h-10 bg-muted rounded mb-4"></div>
+                <div className="h-5 bg-muted rounded mb-6 w-3/4"></div>
+                <div className="flex gap-3">
+                  <div className="h-10 bg-muted rounded w-28"></div>
+                  <div className="h-10 bg-muted rounded w-28"></div>
                 </div>
               </div>
-              <div className="h-96 bg-muted rounded"></div>
+              <div className="h-80 bg-muted rounded-lg"></div>
             </div>
           </div>
         </div>
@@ -87,10 +90,10 @@ export default function ProductPage({ params }: ProductPageProps) {
   if (error) {
     return (
       <PageTransition>
-        <div className="container py-12 md:py-16">
+        <div className="container py-8 md:py-12">
           <Link
             href="/#products"
-            className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mb-8"
+            className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mb-6"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to all products
@@ -116,18 +119,19 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   return (
     <PageTransition>
-      <div className="container py-12 md:py-16">
+      <div className="container py-8 md:py-12">
         <Link
           href="/#products"
-          className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mb-8"
+          className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mb-6"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to all products
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+        {/* Hero Section - 与skeleton布局一致 */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-12">
           <AnimatedContainer animation="fadeIn" duration={0.8}>
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-3 min-h-[20px]">
               <span className="inline-flex items-center justify-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
                 {product.tag || "New"}
               </span>
@@ -135,157 +139,108 @@ export default function ProductPage({ params }: ProductPageProps) {
                 Pro
               </span>
             </div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-4 min-h-[40px] flex items-center">
               {product.title}
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">{product.description}</p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <AnimatedButton size="lg" className="group glow-border">
+            <p className="text-lg text-muted-foreground mb-6 min-h-[20px]">{product.description}</p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <AnimatedButton size="default" className="group h-10">
                 Try for free
               </AnimatedButton>
-              <AnimatedButton size="lg" variant="outline">
+              <AnimatedButton size="default" variant="outline" className="h-10">
                 View demo
               </AnimatedButton>
             </div>
           </AnimatedContainer>
 
           <AnimatedContainer animation="slideUp" delay={0.3} duration={0.8}>
-            <div className="relative rounded-lg border border-border/50 bg-background/50 shadow-lg overflow-hidden glow-border">
-              <Image
-                src={product.image || "/placeholder.svg?height=600&width=800"}
-                width={800}
-                height={600}
-                alt={product.title}
-                className="w-full h-auto"
-                priority
-              />
+            <div className="relative rounded-lg border bg-card/50 backdrop-blur-sm shadow-sm overflow-hidden h-80">
+              {product.videoURL ? (
+                <iframe
+                  src={product.videoURL}
+                  className="w-full h-full"
+                  frameBorder="0"
+                  scrolling="no"
+                  allowFullScreen
+                  title={`${product.title} video`}
+                />
+              ) : (
+                <Image
+                  src={product.image || "/placeholder.svg?height=400&width=600"}
+                  width={600}
+                  height={400}
+                  alt={product.title}
+                  className="w-full h-full object-cover"
+                  priority
+                />
+              )}
             </div>
           </AnimatedContainer>
         </div>
 
-        {/* 产品功能部分 */}
+        {/* Features Section - Features组件 */}
         {product.features && product.features.length > 0 && (
-          <div className="mb-16">
+          <div className="mb-12">
             <AnimatedContainer animation="fadeIn" delay={0.2} duration={0.8}>
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8">Powerful Features & Capabilities</h2>
-              <div className="grid grid-cols-1 gap-8">
-                {product.features.map((feature, index) => (
-                  <AnimatedContainer
-                    key={feature.id || index}
-                    collapsible
-                    title={feature.title}
-                    summary={feature.description}
-                    defaultOpen={index === 0}
-                    animation="fadeIn"
-                    className="w-full"
-                  >
-                    <div className="pt-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
-                        <div>
-                          <p className="text-muted-foreground mb-6 leading-relaxed">{feature.description}</p>
-                          {feature.helps && feature.helps.length > 0 && (
-                            <div className="p-6 bg-muted/10 rounded-lg border border-border/30">
-                              <h5 className="text-sm font-medium mb-4">How this helps you:</h5>
-                              <ul className="space-y-3 text-sm">
-                                {feature.helps.map((help, i) => (
-                                  <li key={i} className="flex items-start">
-                                    <Check className="h-4 w-4 text-primary mr-3 mt-0.5 flex-shrink-0" />
-                                    <span className="text-muted-foreground">{help}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
-                        </div>
-                        <div className="relative rounded-lg border border-border/50 bg-background/50 shadow-lg overflow-hidden glow-border">
-                          <Image
-                            src={feature.image || `/placeholder.svg?height=300&width=500&text=${encodeURIComponent(feature.title)}`}
-                            width={500}
-                            height={300}
-                            alt={feature.title}
-                            className="w-full h-auto"
-                          />
-                        </div>
-                      </div>
-                      <div className="mt-4 flex justify-end">
-                        <AnimatedButton size="sm" variant="outline">
-                          Learn more about this feature
-                        </AnimatedButton>
-                      </div>
-                    </div>
-                  </AnimatedContainer>
-                ))}
-              </div>
+              <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-6">Key Features</h2>
+              <Features 
+                primaryColor="primary"
+                progressGradientLight="bg-gradient-to-r from-primary/80 to-primary"
+                progressGradientDark="bg-gradient-to-r from-primary/60 to-primary/80"
+                features={product.features
+                  .sort((a, b) => (a.order || 0) - (b.order || 0))
+                  .map((feature, index) => ({
+                    id: feature.id || index,
+                    title: feature.title,
+                    description: feature.description + (feature.helps && feature.helps.length > 0 
+                      ? ` Benefits: ${feature.helps.join(', ')}` 
+                      : ''),
+                    image: feature.image || `/placeholder.svg?height=240&width=400&text=${encodeURIComponent(feature.title)}`
+                  }))}
+              />
             </AnimatedContainer>
           </div>
         )}
 
-        {/* How It Works 部分 */}
+        {/* How It Works Section - 与features对齐 */}
         {product.howto && product.howto.length > 0 && (
-          <div className="mb-16">
+          <div className="mb-12">
             <AnimatedContainer
               animation="fadeIn"
               delay={0.3}
               duration={0.8}
-              className="bg-background/30 p-8 rounded-xl border border-border/30"
             >
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8">How It Works</h2>
+              <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-6">How It Works</h2>
               <HorizontalSteps
                 steps={product.howto.map((step) => step.description)}
                 images={product.howto.map((step) => step.image)}
-                className="mb-8"
+                className="mb-6"
               />
-              {product.videoURL && (
-                <div className="mt-12 pt-8 border-t border-border/30">
-                  <h3 className="text-xl font-medium mb-6">Product Video</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                    <div className="relative rounded-lg border border-border/50 bg-background/50 shadow-md overflow-hidden aspect-video md:col-span-1">
-                      <iframe
-                        src={product.videoURL}
-                        className="w-full h-full"
-                        frameBorder="0"
-                        scrolling="no"
-                        allowFullScreen
-                        title={`${product.title} video`}
-                      />
-                    </div>
-                    <div className="md:col-span-2 flex flex-col justify-center">
-                      <h4 className="font-medium text-lg mb-3">{product.title} Demo</h4>
-                      <p className="text-muted-foreground mb-4 leading-relaxed">
-                        Watch this video to see {product.title} in action and learn how it can transform your workflow.
-                      </p>
-                      <div className="text-xs text-muted-foreground bg-muted/30 p-3 rounded-lg inline-block">
-                        Video source: {product.videoURL}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
             </AnimatedContainer>
           </div>
         )}
 
-        {/* 相关产品部分 */}
+        {/* Related Products Section - 更紧凑的布局 */}
         {relatedProducts.length > 0 && (
           <div>
             <AnimatedContainer animation="fadeIn" delay={0.5} duration={0.8}>
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-8">Related Products</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <h2 className="text-xl md:text-2xl font-bold tracking-tight mb-6">Related Products</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {relatedProducts.map((relatedProduct) => (
                   <div
                     key={relatedProduct.id}
-                    className="group relative rounded-lg border border-border/50 bg-background/50 p-6 hover:shadow-md transition-all duration-300 glow-border-hover"
+                    className="group relative rounded-lg border bg-card/50 backdrop-blur-sm p-5 hover:shadow-md transition-all duration-300"
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
                         {getIconComponent(relatedProduct.icon)}
                       </div>
                       <div>
-                        <h3 className="font-medium">{relatedProduct.title}</h3>
+                        <h3 className="font-medium text-sm">{relatedProduct.title}</h3>
                         <span className="text-xs text-muted-foreground">{relatedProduct.tag}</span>
                       </div>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{relatedProduct.description}</p>
+                    <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{relatedProduct.description}</p>
                     <Link
                       href={`/products/${relatedProduct.slug}`}
                       className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"

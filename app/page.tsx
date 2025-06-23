@@ -13,6 +13,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { useCases } from "@/lib/use-cases"
 import SpotlightCard from "@/components/SpotlightCard"
 import ProductsSection from "@/components/products-section"
+import StackingCardsSection from "@/components/stacking-cards-section"
 import { HoleBackground } from "@/components/animate-ui/backgrounds/hole"
 
 
@@ -306,6 +307,9 @@ export default function LandingPage() {
               </div>
             </div>
           </section>
+
+          {/* Stacking Cards Section */}
+          <StackingCardsSection />
 
           {/* Products Section */}
           <ProductsSection />

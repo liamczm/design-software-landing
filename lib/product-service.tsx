@@ -10,6 +10,7 @@ export interface ProductFeature {
   description: string
   helps: string[]
   image: string
+  order?: number
 }
 
 // 定义产品使用方法类型（基于后端API结构）
@@ -94,7 +95,8 @@ async function transformApiProductToProduct(apiProduct: ApiProduct): Promise<Pro
             title: feature.title || '',
             description: feature.description || '',
             helps: Array.isArray(feature.helps) ? feature.helps : [],
-            image: processImageUrl(feature.image)
+            image: processImageUrl(feature.image),
+            order: feature.order || 0
           }))
         }
         
