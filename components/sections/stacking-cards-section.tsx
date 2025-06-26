@@ -5,6 +5,7 @@ import Component from '@/components/ui/stacking-card';
 import AnimatedContainer from "@/components/animated-container"
 import AnimatedText from "@/components/animated-text"
 
+// 静态功能说明
 const projects = [
   {
     title: 'Designify UI Pro',

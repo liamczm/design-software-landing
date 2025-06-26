@@ -69,14 +69,20 @@ export function Features({
   };
 
   return (
-    <div className="py-8 px-4">
+    <div className="py-6 sm:py-8 px-4">
       <div className="max-w-7xl mx-auto">
 
-        <div className="grid lg:grid-cols-2 lg:gap-16 gap-8   items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-start lg:items-center">
           {/* Left Side - Features with Progress Lines */}
           <div
             ref={containerRef}
-            className="lg:space-y-8 md:space-x-6 lg:space-x-0 overflow-x-auto overflow-hidden no-scrollbar lg:overflow-visible flex lg:flex lg:flex-col flex-row order-1 pb-4 scroll-smooth"
+            className="space-y-4 sm:space-y-6 lg:space-y-8 
+                       md:space-x-0 lg:space-x-0 
+                       overflow-x-auto lg:overflow-visible 
+                       flex flex-col sm:flex-col lg:flex-col 
+                       order-2 lg:order-1 
+                       pb-4 lg:pb-0 
+                       scroll-smooth"
           >
             {features.map((feature, index) => {
               const Icon = feature.icon;
@@ -94,21 +100,27 @@ export function Features({
                   {/* Feature Content */}
                   <div
                     className={`
-                    flex lg:flex-row flex-col items-start space-x-4 p-3 max-w-sm md:max-w-sm lg:max-w-2xl transition-all duration-300
+                    flex flex-col sm:flex-row lg:flex-row items-start 
+                    space-y-2 sm:space-y-0 sm:space-x-4 
+                    p-3 sm:p-4 lg:p-3 
+                    w-full sm:max-w-full lg:max-w-2xl 
+                    transition-all duration-300
                     ${
                       isActive
-                        ? " bg-white dark:bg-black/80 md:shadow-xl dark:drop-shadow-lg  rounded-xl md:border dark:border-none border-gray-200 "
-                        : " "
+                        ? "bg-white dark:bg-black/80 shadow-lg sm:shadow-xl dark:drop-shadow-lg rounded-xl border sm:border border-gray-200 dark:border-none"
+                        : "hover:bg-gray-50/50 dark:hover:bg-white/5 rounded-lg"
                     }
                   `}
                   >
                     
 
                     {/* Content */}
-                    <div className="flex-1">
+                    <div className="flex-1 w-full">
                       <h3
                         className={`
-                        text-lg md:mt-4 lg:mt-0 font-semibold mb-2 transition-colors duration-300
+                        text-base sm:text-lg 
+                        font-semibold mb-1 sm:mb-2 
+                        transition-colors duration-300
                         ${
                           isActive
                             ? "text-gray-900 dark:text-white"
@@ -120,7 +132,9 @@ export function Features({
                       </h3>
                       <p
                         className={`
-                        transition-colors duration-300 text-sm
+                        transition-colors duration-300 
+                        text-xs sm:text-sm 
+                        leading-relaxed
                         ${
                           isActive
                             ? "text-gray-600 dark:text-white/60"
@@ -130,7 +144,7 @@ export function Features({
                       >
                         {feature.description}
                       </p>
-                      <div className="mt-4 bg-white dark:bg-black/80 rounded-sm   h-1 overflow-hidden">
+                      <div className="mt-3 sm:mt-4 bg-white dark:bg-black/80 rounded-sm h-1 overflow-hidden">
                         {isActive && (
                           <motion.div
                             className={`h-full ${progressGradientLight} dark:${progressGradientDark}`}
@@ -148,7 +162,7 @@ export function Features({
           </div>
 
           {/* Right Side - Image Display */}
-          <div className="relative order-1 max-w-lg mx-auto lg:order-2">
+          <div className="relative order-1 lg:order-2 w-full max-w-lg mx-auto lg:max-w-none">
             <motion.div
               key={currentFeature}
               initial={{ opacity: 0, y: 50 }}
@@ -157,7 +171,7 @@ export function Features({
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="relative"
             >
-              <div className="relative w-full h-[400px] overflow-hidden rounded-2xl border dark:border-none border-gray-50 shadow-lg dark:drop-shadow-lg">
+              <div className="relative w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] overflow-hidden rounded-xl sm:rounded-2xl border dark:border-none border-gray-50 shadow-md sm:shadow-lg dark:drop-shadow-lg">
                 <Image
                   src={features[currentFeature].image}
                   alt={features[currentFeature].title}
